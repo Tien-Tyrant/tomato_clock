@@ -5,16 +5,10 @@ class LengthSetting extends React.Component {
         super(props)
 
         this.state = {
-            length: 0
+            length: this.props.init
         }
 
         this.add = this.add.bind(this);
-    }
-
-    componentDidMount() {
-        this.setState({
-            length: this.props.init
-        })
     }
 
     add(number) {
@@ -22,6 +16,7 @@ class LengthSetting extends React.Component {
             this.setState(state => {
                 var newLength = eval(state.length + number);
                 if (newLength > 0 && newLength <= 60) {
+                    this.props.lengthChanged(newLength);
                     return {
                         length: newLength
                     }
@@ -35,11 +30,11 @@ class LengthSetting extends React.Component {
 
     render() {
         return <div className="length-control">
-            <p id={`${this.props.name.toLowerCase()}-label`}>{this.props.name} Length</p>
+            <div id={`${this.props.name.toLowerCase()}-label`}>{this.props.name} Length</div>
             <button className="btn-level">
                 <i id={`${this.props.name.toLowerCase()}-decrement`} className="fa fa-arrow-down fa-2x" onClick={e => this.add(-1)}></i>
             </button>
-            <p className="btn-level" id={`${this.props.name.toLowerCase()}-length`}>{this.state.length}</p>
+            <div className="btn-level" id={`${this.props.name.toLowerCase()}-length`}>{this.props.init}</div>
             <button className="btn-level">
                 <i id={`${this.props.name.toLowerCase()}-increment`} className="fa fa-arrow-up fa-2x" onClick={e => this.add(1)}></i>
             </button>
