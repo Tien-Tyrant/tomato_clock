@@ -24,7 +24,14 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    this.reset();
+    this.setState({
+      breakLength: 5,
+      sessionLength: 25,
+      hasStarted: false,
+      playpause: 'play',
+      countDown: 25 * 60,
+      timerName: 'Session'
+    });
   }
 
   reset() {
